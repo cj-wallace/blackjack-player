@@ -6,7 +6,7 @@ from hand import ResultType
 start_time = time.time()
 
 print_output = False
-size = 10000
+size = 100
 runners = []
 for i in range(size):
     runners.append(Runner())
