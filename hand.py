@@ -1,9 +1,17 @@
 from card import Card
 
+class ResultType(enumerate):
+    Win = 0
+    Blackjack = 1
+    Push = 2
+    Lose = 3
+    Bust = 4
+
 class Hand:
     def __init__(self, cards, dealer=False):
         self.cards = cards
         self.dealer = dealer
+        self.result_type = None
 
     def score(self, initial=False):
         score = 0
@@ -25,12 +33,12 @@ class Hand:
                 score += card_score
 
                 if score > 21:
-                    score = 0
+                    #score = 0
                     break
 
         return score
 
-    def print_hand(self, initial=False):
+    def print_hand(self, initial=False, score=False):
         """
         Print cards list using Cards.print.
         """
@@ -50,6 +58,20 @@ class Hand:
                 else:
                     output += str(Card.print_card(c)) + " "
         return output
+
+    def evaluate(self, dealer_hand):
+        if(self.score(True) == 21):
+            self.result_type = ResultType.Blackjack
+        elif(self.score() > 21):
+            self.result_type = ResultType.Bust
+        elif(dealer_hand.score() > 21):
+            self.result_type = ResultType.Win
+        elif(self.score() > dealer_hand.score()):
+            self.result_type = ResultType.Win
+        elif(self.score() < dealer_hand.score()):
+            self.result_type = ResultType.Lose
+        else:
+            self.result_type = ResultType.Push
 
     def hit(self, card):
         self.cards.append(card)
