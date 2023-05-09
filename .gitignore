@@ -1,0 +1,4 @@
+# Ignore all files in these directories
+.vscode/
+.idea/
+__pycache__/
