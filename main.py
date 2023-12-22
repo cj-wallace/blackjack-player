@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import threading
 import time
 from runner import Runner
@@ -5,8 +7,10 @@ from hand import ResultType
 
 start_time = time.time()
 
+print("Starting blackjack simulation...")
+
 print_output = False
-size = 10000
+size = 50000
 runners = []
 for i in range(size):
     runners.append(Runner())
