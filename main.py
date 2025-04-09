@@ -10,7 +10,7 @@ start_time = time.time()
 print("Starting blackjack simulation...")
 
 print_output = False
-size = 50000
+size = 5000
 runners = []
 for i in range(size):
     runners.append(Runner())

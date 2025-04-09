@@ -28,13 +28,13 @@ class Runner():
 
         #Check for blackjack
         if self.hand.score(True) == 21:
-            self.output("Blackjack!", print_output)
-            self.output("Hand :"+ self.hand.print_hand(True,True), print_output)
+            self.output("Blackjack! ", print_output)
+            self.output("Hand: "+ self.hand.print_hand(True,True), print_output)
             self.output("Dealer: "+ self.dealer_hand.print_hand(True,True), print_output)
             self.hand.evaluate(self.dealer_hand)
             return
 
-        self.output("Hand :"+ self.hand.print_hand(True,True), print_output)
+        self.output("Hand: "+ self.hand.print_hand(True,True), print_output)
         self.output("Dealer: "+ self.dealer_hand.print_hand(True,True), print_output)
 
         input_mode = True
@@ -46,15 +46,21 @@ class Runner():
                 input_mode = False
             elif new_input == Input.HIT:
                 self.hand.hit(self.deck.draw(1))
-                self.output("Hand :"+ self.hand.print_hand(False,True), print_output)
+                self.output("Hand: "+ self.hand.print_hand(False,True), print_output)
                 if self.hand.score(False) > 21:
                     input_mode = False
-        self.output("Outcome", print_output)
-        self.output("Hand :"+ self.hand.print_hand(False,True), print_output)
+            
+            
+        self.output("Outcome: ", print_output)
+        self.output("Hand: "+ self.hand.print_hand(False,True), print_output)
         self.output("Dealer: "+ self.dealer_hand.print_hand(False,True), print_output)
         self.hand.evaluate(self.dealer_hand)
 
     def get_input(self):
+        if self.hand.score(False) >= 17:
+            return Input.STAND
+        
+        
         r = random.randint(0, 99)
         if r < 50:
             return Input.HIT
